@@ -1,0 +1,54 @@
+/* CHANGELISTS */
+#changelist {
+    position: relative;
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+.change-list .hiddenfields { 
+    display:none; 
+}
+
+
+/* CHANGELIST TABLES */
+#changelist table thead th div {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#changelist table thead th.action-checkbox-column div {
+    width: 1.5em;
+    text-align: center;
+}
+
+#changelist table tbody td, #changelist table tbody th {
+    border-left: 1px solid #ddd;
+}
+
+#changelist table tbody td:first-child, #changelist table tbody th:first-child {
+    border-left: 0;
+    border-right: 1px solid #ddd;
+}
+
+#changelist table tbody td.action-checkbox {
+    text-align:center;
+}
+
+#changelist table tfoot {
+   // color: #666;
+    color: #ffffff;
+}
+
+.pagination {
+    text-align:center;
+    padding-top:10px;
+}
+
+div.float_right {
+    right: 10px;
+    vertical-align: middle;
+    text-align: right;
+    float: right;
+}

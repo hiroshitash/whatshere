@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+  <title>What's here!</title>
+  <script type="text/javascript" src="/lmedia/js/jquery-1.7.2.js"></script>
+  <script>
+
+function getURLParameter(name) {
+    return decodeURI(
+      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+
+$(document).ready(function(){
+  longitude = getURLParameter('longitude');
+  latitude = getURLParameter('latitude');
+
+  if (isNaN(longitude) || isNaN(latitude)) {
+    getLocation();
+  } else {
+    action  = '{{ app_url }}?c={{ refresh_cnt }}&';  
+    action += 'geobrowsertried=True&longitude=' + longitude + '&latitude=' + latitude;
+    action += '&access_token={{access_token}}&signed_request={{signed_request}}';
+    //alert(action);
+    $('#target').attr("action", action);
+    $('#target').submit();
+  }
+});
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+function (pos)
+{
+  action  = '{{ app_url }}?c={{ refresh_cnt }}&';
+  action += 'geobrowsertried=True&longitude=' + pos.coords.longitude + '&latitude=' + pos.coords.latitude;
+  action += '&access_token={{access_token}}&signed_request={{signed_request}}';
+  //alert(action);
+  $('#target').attr("action", action);
+  $('#target').submit();
+
+}, failedToGetGeo
+);
+  } else {
+    failedToGetGeo();
+  }
+}
+
+function failedToGetGeo() {
+    alert("Geolocation is not supported by this browser. Finding location by IP address.");
+    var action = '{{ app_url }}?geobrowsertried=True&c={{ refresh_cnt }}&access_token={{access_token}}&signed_request={{signed_request}}';
+    $('#target').attr("action", action);
+    $('#target').submit();
+    $('form.coordform').submit();
+    $('form').submit();
+}
+
+  </script>
+</head>
+<body>
+<form id="target" class="coordform" target="_top" action="{{ app_url }}" method="POST" >
+
+</form>
+</body>
+</html>

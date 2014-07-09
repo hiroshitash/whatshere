@@ -1,0 +1,61 @@
+{% if deal_list|length %}
+	<table cellspacing="0" id="changelist" style="width: 100%;">
+	<thead>
+	<tr>
+	  <th scope="col" style="width:15%">Title</th>
+	  <th scope="col" style="width:10%">Location</th>
+	  <th scope="col" style="width:12%">Highlights</th>
+	  <th scope="col" style="width:45%">Merchant
+	      <div class="float_right">
+	        <img src="/lmedia/image/powered_by_groupon.png" alt="" width="120px" height="40px"> 
+	      </div>
+	  </th>
+	</tr>
+	</thead>
+	<tbody>
+  {% for deal in deal_list %}
+  	<tr class="{% cycle 'row1' 'row2' %}" id="tr_{{ deal.uuid }}">
+	    <td>
+	    	<a href="{{ deal.cjUrl|safe }}" target="_wh_groupon">{{ deal.title|safe }}</a>
+	    </td>
+	    <td>
+	        {{ deal.redemptionLocation|safe }}
+	    </td>
+	    <td>
+	        {{ deal.highlightsHtml|safe }}
+	    </td>
+	    <td>
+		<a href="{{ deal.merchant.websiteUrl|safe }}" target="_wh_merchant">{{ deal.merchant.name|safe }}</a>
+		<div class="float_right">
+  	          <img src="{{ deal.mediumImageUrl|safe }}" alt="">
+		</div>
+	    </td>
+	</tr>
+  {% endfor %}
+	</tbody>
+    </table>
+  {% if False %}
+  {#% if is_paginated %#}
+    <div class="pagination">
+      <span class="page-links">
+    {% if page.has_previous %}
+       <a href="javascript:displayPage(0, {{ page.previous_page_number }})">Previous</a>
+    {% endif %}
+    {% for page_num in paginator.page_range %}
+      {% ifequal page_num page.number %}
+      <a>{{ page_num }}</a>
+      {% else %}
+      <a href="javascript:displayPage(0, {{ page_num }})">{{ page_num }}</a>
+      {% endifequal %}
+    {% endfor %}
+    {% if page.has_next %}
+       <a href="javascript:displayPage(0, {{ page.next_page_number }})">Next</a>
+    {% endif %}
+      </span>
+    </div>
+  {% endif %}
+{% else %}
+	<p>No deal is available.</p>
+{% endif %}
+
+

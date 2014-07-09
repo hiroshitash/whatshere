@@ -1,0 +1,27 @@
+
+        <div class="facebook logins_item">
+	  <ul>
+    {% if current_user %}
+	    <li>
+  	      <a href="{{ current_user.link }}" target="blank">
+	        {{ current_user.name|escape }}
+	      </a> 
+	    </li>
+	    <li>
+	      <a href="/auth/logout"><img src="/lmedia/image/facebook_22x22.gif" alt="fb"/>Logout</a>
+	    </li>
+    {% else %}
+	    <li>
+	      <a href="/auth/login"><img src="/lmedia/image/facebook_22x22.gif" alt="fb"/>Facebook Login</a>
+	    </li>
+    {% endif %}
+	  </ul>
+	</div>
+
+	<div class="twitter logins_item">
+	  <ul>
+	    <li>
+	      <a href="" target="blank"><img src="/lmedia/image/twitter_22x22.gif" alt="twitter"/>Twitter Login</a>
+	    </li>
+	  </ul> 
+	</div>

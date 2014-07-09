@@ -1,0 +1,95 @@
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
+    margin:0;  
+    padding:0;  
+    -webkit-text-size-adjust:none;  
+}  
+
+
+/* PLACELISTS */
+#placelist {
+    position: relative;
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+}
+
+.change-list .hiddenfields { 
+    display:none; 
+}
+
+
+/* PLACELIST TABLES */
+#placelist table thead th, #placelist table h3{
+    font-size: 1.2em;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#placelist table tbody tr {
+    height: 70px;
+}
+
+#placelist table tbody td, #placelist table tbody th {
+    font-size: 100%;
+    border-left: 3px solid #ddd;
+}
+
+#placelist table tbody td:first-child, #placelist table tbody th:first-child {
+    border-left: 0;
+    border-right: 3px solid #ddd;
+}
+
+#placelist table tfoot {
+    color: #ffffff;
+}
+
+
+div.list_container > ol {
+    font-weight: bold;
+    list-style-position: inside;
+    -webkit-margin-before: 5px;
+    -webkit-margin-after: 5px;
+    -webkit-padding-start: 5px;
+/*    list-style: none;*/
+}
+
+div.info_box{
+    font-size: 1.2em;
+    font-weight: normal;
+    position: relative;
+}
+
+div.info_box h3 {
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding-right: 45px;
+}
+
+div.info_box div.category {
+    font-weight: bold;
+    color: #999;
+    font-size: 100%;
+}
+
+div.info_box div.category {
+    font-size: 100%;
+}
+
+div.info_box div.distance {
+    right: 20px;
+    text-align: right;
+    vertical-align: middle;
+    float: right;
+}
+
+div.info_box div.checkins {
+    padding-bottom: 10px;
+}
+
+.pagination {
+    font-size: 15px;
+    text-align:center;
+    padding-top:12px;
+}
+

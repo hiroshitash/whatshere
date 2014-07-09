@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Welcome to What's here app!</title>
+    <meta name="description" content="Discover What's around you. Restaurant/Venue recommendation.">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> 
+    <meta name="msvalidate.01" content="97BEC6FA730F9701827E40DE30D837CF" />
+    <!--link rel="stylesheet" type="text/css" href="/lmedia/css/m/base.css" /-->
+    <link rel="stylesheet" type="text/css" href="/lmedia/css/w/tabs.css" />
+  <script type="text/javascript" src="/lmedia/js/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="/lmedia/js/tabs.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39748072-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </head>
+  <body class="oauth">
+    <!--div class="logins" style="margin-bottom:40%; margin-top:40%; margin-left:35%; margin-right:auto;"-->
+    <!--div class="logins" style="margin-bottom:auto; margin-top:auto; margin-left:auto; margin-right:auto;"-->
+    <div class="outer-table">
+    <div class="outer-table-left">
+      <div class="table-left-cell-top">
+      </div>
+      <div class="table-left-cell-middle">
+	<p class="description">We help you discover venues/restaurants/deals around you. We recommend places based on your friends' Facebook checkins and your Facebook interests. Enjoy!
+	</p>
+      </div>
+    </div>
+    <div class="outer-table-right">
+    <div class="cell-top">
+    </div>
+    <div class="cell-middle">
+      {% include "w/login.tmpl" %}
+    </div>
+      
+    </div>
+    </div>
+
+    <div class="footer">
+      <ul class="footer_list_left">
+	<li>
+  	  <a href='http://www.gotsitemonitor.com' target='_blank'><img src="https://cdn.gotsitemonitor.com/image/website_checked_gray.png" alt="Website Monitoring" border="0" width="80" height="15" /></a>
+  	  <a href='http://whatshereapp.ideascale.com/' target='_blank'>Give Us Feedback</a>
+
+	</li>
+      </ul>
+      <ul class="footer_list">
+        <li>
+          <a href="mailto:hiroshitash@gmail.com">Contact</a>
+        </li>
+        <li>
+          <a href="/lmedia/html/wh_privacy_policy.html" target="_wh_page">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="/lmedia/html/wh_term_of_service.html" target="_wh_page">Terms of Service</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

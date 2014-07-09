@@ -1,0 +1,29 @@
+July 17, 2012:
+- Verify tool/query_fb_nearby_place works
+
+July 19, 2012:
+- Modify mongo persistence layer so that preference rate is number instead of dict.
+
+July 21, 2012:
+- Write recommendation
+- Write query_save_similar_place
+
+July 25, 2012:
+- Write recommendation
+- evaluate map reduce
+
+August 4, 2012:
+- improve interface (html5, javascript library, add tab for recommend)
+- scale
+- incorporate classifier
+- twitter
+- incorporate advertising framework
+
+April 10, 2013:
+- groupon query: http://api.groupon.com/v2/deals?client_id=1dff88422a9bfe2be21e99c4355cdd5a4a817f87&lat=41.388401&lng=2.169113&radius=100&sort=distance
+
+May 15, 2013:
+- Description of app
+- speed up groupon tab
+- logo on first page
+- feed some candy at initial login

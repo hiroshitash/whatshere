@@ -1,0 +1,41 @@
+{% if recommend_list|length %}
+
+
+<div class="list_container">
+  <ol>
+  {% for place in recommend_list %}
+      <li class="{% cycle 'row1' 'row2' %} place_listing">
+        <div class="info_box">
+  	  <h3>
+    {% if place.page_url and place.page_url|length > 0 %}
+	      <a class="place_name" id="{{ place.page_id|escape }},{{ place.longitude|escape }},{{ place.latitude|escape }}" href="{{ place.page_url|escape }}" target="_fb_page">
+	        {{ place.name|escape }}
+	      </a>
+    {% else %}
+	      <a class="place_name" id="{{ place.page_id|escape }},{{ place.longitude|escape }},{{ place.latitude|escape }}" href="javascript:goto({{ place.page_id|escapejs }})">
+	        {{ place.name|escape }}
+	      </a>
+    {% endif %}
+	  </h3>
+	  <div class="distance">
+  	     {{ place.distance_txt|escape }} mi
+	  </div>
+	  <address>
+            {{place.location.street|escape}} {{place.location.city|escape}} {{place.location.state|escape}} {{place.location.zip|escape}}
+	  </address>
+	  <div class="category">
+	    <p>
+	      {% for c in place.categories %}
+	        {{ c.name|escape }}{% if not forloop.last %}&#44;{% endif %}
+	      {% endfor %}
+	    </p>
+	  </div>
+	</div>  <!-- div class="info_box" -->
+      </li>
+  {% endfor %}
+    </ol>
+  </div>  <!-- div class="list-div" -->
+  {% include "w/pagenate.tmpl" %}
+{% else %}
+	<p>No recommendations are available.</p>
+{% endif %}

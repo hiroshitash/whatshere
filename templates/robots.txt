@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /lmedia/html/wh_privacy_policy.html
+Disallow: /lmedia/html/wh_term_of_service.html
+
+

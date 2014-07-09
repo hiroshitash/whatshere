@@ -1,0 +1,51 @@
+{% if deal_list|length %}
+
+  <div class="list_container">
+    <ol>
+  {% for deal in deal_list %}
+      <li class="{% cycle 'row1' 'row2' %} place_listing">
+        <div class="info_box">
+  	  <h3>
+	    <a class="place_name" id="{{ deal.uuid|escape }}" href="{{ deal.cjUrl|safe }}" target="_wh_groupon">
+	        {{ deal.title|safe }}
+	    </a>
+	  </h3>
+	  <div class="distance">
+  	     {{ deal.redemptionLocation|escape }} 
+	     <img src="{{ deal.mediumImageUrl|safe }}" alt="">
+	  </div>
+	  <div class="category">
+	        {{ deal.highlightsHtml|safe }}
+	  </div>
+	  <div class="checkins">
+     	    <a href="{{ deal.merchant.websiteUrl|safe }}" target="_wh_merchant">{{ deal.merchant.name|safe }}</a>
+	      <div class="float_right">
+	        <img src="/lmedia/image/powered_by_groupon.png" alt="" width="120px" height="40px"> 
+	      </div>
+	  </div>
+	</div>  <!-- div class="info_box" -->
+      </li>
+  {% endfor %}
+    </ol>
+  </div>  <!-- div class="list-div" -->
+
+  {% if False %}
+  {#% if is_paginated %#}
+    <div class="pagination">
+      <span class="page-links">
+    {% for page_num in paginator.page_range %}
+      {% ifequal page_num page.number %}
+      <a>{{ page_num }}</a>
+      {% else %}
+      <a href="javascript:displayPage(0, {{ page_num }})">{{ page_num }}</a>
+      {% endifequal %}
+    {% endfor %}
+      </span>
+    </div>
+  {% endif %}
+
+{% else %}
+	<p>No deal is available.</p>
+{% endif %}
+
+

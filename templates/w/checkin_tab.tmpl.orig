@@ -1,0 +1,67 @@
+{% if checkin_list|length %}
+	<table cellspacing="0" id="changelist" style="width: 100%;">
+	<thead>
+	<tr>
+	  <th scope="col" style="width:15%">Place</th>
+	  <th scope="col" style="width:10%">Categories</th>
+	  <th scope="col" style="width:12%">Checkins</th>
+	  <th scope="col" style="width:5%">Distance</th>
+	  <th scope="col" style="width:13%">Location</th>
+	  <th scope="col" style="width:45%">Description</th>
+	</tr>
+	</thead>
+	<tbody>
+  {% for place in checkin_list %}
+	  <tr class="{% cycle 'row1' 'row2' %}" id="tr_{{ place.page_id|escape }}">
+	    <td>
+    {% if place.page_url and place.page_url|length > 0 %}
+	      <a class="place_name" id="{{ place.page_id|escape }},{{ place.longitude|escape }},{{ place.latitude|escape }}" href="{{ place.page_url|escape }}" target="_fb_page">
+	        {{ place.name|escape }}
+	      </a>
+    {% else %}
+	      <a class="place_name" id="{{ place.page_id|escape }},{{ place.longitude|escape }},{{ place.latitude|escape }}" href="javascript:goto({{ place.page_id|escapejs }})">
+	        {{ place.name|escape }}
+	      </a>
+    {% endif %}
+            </td>
+	    <td>
+	      {% for c in place.categories %}
+	        {{ c.name|escape }}{% if not forloop.last %}&#44;{% endif %}
+	      {% endfor %}
+	    </td>
+	    <td>
+    {% for ci in place.checkin_display_txts %}
+  	    {{ ci|escape }}
+    {% endfor %}
+	    </td>
+	    <td>{{ place.distance_txt|escape }} miles</td>
+	    <td>{{place.location.street|escape}} {{place.location.city|escape}} {{place.location.state|escape}} {{place.location.zip|escape}}</td>
+	    <td>{{ place.description|escape }}</td>
+	  </tr>
+  {% endfor %}
+	</tbody>
+    </table>
+  {% if is_paginated %}
+    <div class="pagination">
+      <span class="page-links">
+    {% if page.has_previous %}
+       <a href="javascript:displayPage(0, {{ page.previous_page_number }})">Prev</a>
+    {% endif %}
+    {% for page_num in paginator.page_range %}
+      {% ifequal page_num page.number %}
+      <a>{{ page_num }}</a>
+      {% else %}
+      <a href="javascript:displayPage(0, {{ page_num }})">{{ page_num }}</a>
+      {% endifequal %}
+    {% endfor %}
+    {% if page.has_next %}
+       <a href="javascript:displayPage(0, {{ page.next_page_number }})">Next</a>
+    {% endif %}
+      </span>
+    </div>
+  {% endif %}
+{% else %}
+	<p>No place is available.</p>
+{% endif %}
+
+

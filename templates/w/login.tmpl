@@ -1,0 +1,32 @@
+      <ul class="dropdown">
+	<li class="twitter">
+	  <a href="" target="blank">
+	     <img src="/lmedia/image/twitter_22x22.gif"/>
+	     Log in with Twitter
+	  </a> 
+	</li>
+        <li class="facebook">	  
+    {% if current_user %}
+	  <a href="{{ current_user.link }}" target="blank">
+	     <img src="/lmedia/image/facebook_22x22.gif"/>
+	     {{ current_user.name|escape }}
+	  </a> 
+	  <ul>
+	    <li>
+	      <a href="/auth/logout">Log out</a> 
+	    </li>
+	  </ul>
+    {% else %}
+	  <a href="/auth/login">
+	     <img src="/lmedia/image/facebook_22x22.gif"/>
+	     Log in with Facebook
+	  </a> 
+	  
+    {% endif %}
+	</li>
+	<li class="groupon">
+	  
+	</li>
+
+      </ul>
+

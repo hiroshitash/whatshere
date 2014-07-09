@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+  <title>What's here!</title>
+  <link rel="stylesheet" type="text/css" href="/lmedia/css/m/base.css" />
+  <link rel="stylesheet" type="text/css" href="/lmedia/css/m/tabs.css" />
+  <script type="text/javascript">
+function getURLParameter(name) {
+    return decodeURI(
+      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+
+function reVisitSite(){
+  longitude = getURLParameter('longitude');
+  latitude = getURLParameter('latitude');
+  access_token = getURLParameter('access_token');
+  //alert(window.location);
+  top.location.href = '{{ app_url }}?c={{ refresh_cnt }}&longitude=' + longitude + '&latitude=' + latitude + '&access_token=' + access_token;
+}
+  </script>
+</head>
+<body onLoad="setTimeout('reVisitSite()', 5000*{{ refresh_cnt }})" class="oauth">
+<br><br><br><br>
+  <h1 align="center">Thank you for signing up WhatsHereApp. Gathering information. Please come back in a few minutes</h1>
+</body>
+</html>

@@ -1,0 +1,19 @@
+  {% if is_paginated %}
+    <div class="pagination">
+      <span class="page-links">
+    {% if page.has_previous %}
+       <a href="javascript:displayPage({{ tab_num }}, {{ page.previous_page_number }}, {{ sort_by }}, '{{ wh_q }}')">Prev</a>
+    {% endif %}
+    {% for page_num in paginator.page_range %}
+      {% ifequal page_num page.number %}
+      <a>{{ page_num }}</a>
+      {% else %}
+      <a href="javascript:displayPage({{ tab_num }}, {{ page_num }}, {{ sort_by }}, '{{ wh_q }}')">{{ page_num }}</a>
+      {% endifequal %}
+    {% endfor %}
+    {% if page.has_next %}
+       <a href="javascript:displayPage({{ tab_num }}, {{ page.next_page_number }}, {{ sort_by }}, '{{ wh_q }}')">Next</a>
+    {% endif %}
+      </span>
+    </div>
+  {% endif %}

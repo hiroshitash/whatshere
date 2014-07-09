@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+  <title>What's here!</title>
+
+  <link rel="stylesheet" type="text/css" href="/lmedia/css/w/jquery-ui-1.8.23.custom.css" />
+  <link rel="stylesheet" type="text/css" href="/lmedia/css/w/changelists.css" />
+  <link rel="stylesheet" type="text/css" href="/lmedia/css/w/tabs.css" />
+  <link rel="stylesheet" type="text/css" href="/lmedia/css/w/base.css" />
+  <div id="fb-root"></div>
+  <script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
+
+  <!--script type="text/javascript" src="/lmedia/js/__jquery/jquery-latest.js"></script-->
+  <script type="text/javascript" src="/lmedia/js/jquery-1.7.2.js"></script>
+  <script type="text/javascript" src="/lmedia/js/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="/lmedia/js/jquery-ui-1.8.23.custom.min.js"></script>
+  <script type="text/javascript">
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId  : '178504128874319',
+      channelUrl : '{{ ec2_page }}/channel.py', // Channel File
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true, // parse XFBML
+    });
+    FB.Canvas.setAutoGrow();
+  }
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+  </script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39748072-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body class="change-list">
+<div id="fb-root"></div>
+
+<div id="ad3">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7226914689248378";
+/* left banner 2 */
+google_ad_slot = "1231460443";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+<div id="tabContainer">
+  <div class="hidden" id="client_long">{{ client_long }}</div>
+  <div class="hidden" id="client_lat">{{ client_lat }}</div>
+
+  <div class="content-main" id="placelist">
+    <div id="dialog" class="hidden" title="Basic dialog"><p>This is the default dialog which is useful for displaying information.</p></div>
+    <div class="content-upper">
+      <div class="tabs">
+	<ul>
+          <li id="tabHeader_0">Recommendations</li>
+          <!--li id="tabHeader_1">Deals</li-->
+	</ul>
+      </div>
+      {% if flag_login %}
+      <div class="logins">
+        {% include "w/login.tmpl" %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="tabscontent">
+      <div class="tabpage" id="tabpage_0">
+	{% include "w/recommendation_tab.tmpl" with tab_num="0" %}
+      </div> <!-- tabpage_0-->
+      <div class="tabpage" id="tabpage_1">
+	{% include "w/deal_tab.tmpl" %}
+      </div> <!-- tabpage_1-->
+    </div> <!-- tabscontent--> 
+    <p>Client location: {{ client_city }}, {{ client_state }} {{ client_country }}&nbsp;&nbsp;&nbsp;&nbsp;(longitude, latitude):({{ client_long }}, {{ client_lat }})</p>
+    <p>Agent: {{ agent }}</p>
+  </div> <!-- content-main -->
+</div> <!-- tabContainer -->
+
+  <script type="text/javascript">
+  access_token = '{{ access_token }}';
+  function goto(page_id) {
+    FB.api('/' + page_id, function(response) {
+        //alert(response['link']);
+        //alert(response);
+        if (response && response['link'] != 'undefined') {
+          //top.location = response['link'];
+          window.open(response['link'], '_fb_page');
+        } else {
+          dialog_msg = "<p>Page not found.</p>";
+        $('#dialog').html(dialog_msg).dialog({title: response['name'], model: true, autoOpen: false, minWidth: 450, position: [event.pageX + 80, event.pageY - 20]}).dialog('open');
+        }  
+    });
+  }  
+  </script>
+  <script type="text/javascript" src="/lmedia/js/tabs.js"></script>
+  <script type="text/javascript" src="/lmedia/js/dynamic.js"></script>
+</body>
+
+</html>
+

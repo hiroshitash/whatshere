@@ -1,0 +1,102 @@
+function getURLParameter(name) {
+    return decodeURI(
+      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+
+
+$(document).ready( function() {
+    var wh_q = getURLParameter('wh_q');
+    var tab_index_show = (wh_q == 'recommend')? 1: 0;
+
+    // get tab container
+    var container = $('#tabContainer');
+    var navitem = $(".tabs ul li", container).eq(tab_index_show);
+    var tab_holder = $(".tabs", container);
+
+    tab_holder.attr('data-current-tab', tab_index_show);
+    tab_holder.attr('data-current-page', 1);
+    navitem.attr('class', 'tabActiveHeader');
+
+    var pages = $('.tabpage', container);
+    pages.each(function(index) {
+	    if (index != tab_index_show) {
+		$(this).hide();
+	    }
+	});
+
+    var tabs = $(".tabs ul li", container)
+    tabs.each(function(index) {
+	    //tabs.click({page_num: 1}, displayTabContent);
+	    //tabs[index].click({tab_num: index}, displayTabContent);
+	    $(this).click({tab_num: index}, displayTabContent);
+	});
+
+    $("ul.dropdown li").hover(
+      function(){
+        $('ul:first',this).css('display', 'block');
+      }, 
+      function(){    
+	$('ul:first',this).css('display', 'none');
+      }
+    );
+
+} );
+
+
+// on click of one of tabs
+function displayTabContent(event) {
+    //    var page_num = event.data.page_num;
+    //    var tab_num = $(this).attr('id').split("_")[1]; 
+    displayPage(event.data.tab_num, event.data.page_num);
+}
+
+function displayPage(tab_num, page_num) {
+    $("#dialog").dialog('close');
+
+    var tab_holder = $(".tabs");
+    var current_tab_id = tab_holder.attr('data-current-tab');
+    var current_page_id = tab_holder.attr('data-current-tab' + current_tab_id + '-page');
+    var current_tab_header = $("#tabHeader_" + current_tab_id);
+
+    current_tab_header.removeAttr('class');
+    $("#tabHeader_" + tab_num).attr("class","tabActiveHeader");
+    var table_changelist = $("#tabpage_" + tab_num + " > #changelist");
+
+    if (table_changelist.length != 0 && tab_num != current_tab_id && 
+	(typeof page_num == 'undefined' || page_num == tab_holder.attr('data-current-tab' + tab_num + '-page'))) {
+	$("#tabpage_" + current_tab_id).hide();
+	$("#tabpage_" + tab_num).show();
+    } else if (table_changelist.length == 0 || page_num != current_page_id || tab_num != current_tab_id) {
+	if (typeof page_num == 'undefined') {
+	    page_num = 1;
+	}
+
+	$("#tabpage_" + current_tab_id).hide();
+	$("#tabpage_" + tab_num).empty();
+	$("#tabpage_" + tab_num).append('<table cellspacing="0" id="changelist"><tr><h2>Loading...</h2></tr></table>')
+	$("#tabpage_" + tab_num).show();
+
+	var longitude = $('#client_long').text();
+	var latitude = $('#client_lat').text();
+	//alert(longitude);
+
+	var get_url = 'view.py?geobrowsertried=True&longitude=' + longitude + '&latitude=' + latitude + '&wh_format=ajax&access_token=';
+	get_url += access_token + '&page=' + page_num;
+
+	if (tab_num != 0) {
+	    // get recommendations
+	    get_url += '&wh_q=recommend';
+	}
+	get_url += '&callback=?';
+	$.ajax({url:get_url}).done( function(data) {
+		//alert('ajax get success' + data);
+		$("#tabpage_" + tab_num).empty();
+		$("#tabpage_" + tab_num).append(data);
+		$.getScript("/lmedia/js/dynamic.js");
+	} );
+    }
+
+    tab_holder.attr("data-current-tab", tab_num);
+    tab_holder.attr("data-current-tab" + tab_num + "-page", page_num);
+}
